@@ -66,25 +66,14 @@ const variantClasses = {
   },
 } as const
 
-const directoryPalette = {
-  'directory-clean': {
-    shell: 'border-b border-slate-200 bg-white/94 text-slate-950 shadow-[0_1px_0_rgba(15,23,42,0.04)] backdrop-blur-xl',
-    logo: 'rounded-2xl border border-slate-200 bg-slate-50',
-    nav: 'text-slate-600 hover:text-slate-950',
-    search: 'border border-slate-200 bg-slate-50 text-slate-600',
-    cta: 'bg-slate-950 text-white hover:bg-slate-800',
-    post: 'border border-slate-200 bg-white text-slate-950 hover:bg-slate-50',
-    mobile: 'border-t border-slate-200 bg-white',
-  },
-  'market-utility': {
-    shell: 'border-b border-[#d7deca] bg-[#f4f6ef]/96 text-[#1f2617] shadow-[0_1px_0_rgba(64,76,34,0.06)] backdrop-blur-xl',
-    logo: 'rounded-xl border border-[#d7deca] bg-white',
-    nav: 'text-[#56604b] hover:text-[#1f2617]',
-    search: 'border border-[#d7deca] bg-white text-[#56604b]',
-    cta: 'bg-[#1f2617] text-[#edf5dc] hover:bg-[#2f3a24]',
-    post: 'border border-[#d7deca] bg-white text-[#1f2617] hover:bg-[#eef2e4]',
-    mobile: 'border-t border-[#d7deca] bg-[#f4f6ef]',
-  },
+const ideoveraDirectoryPalette = {
+  shell: 'border-b border-[#b6e2da]/90 bg-[#f7fcfb]/95 text-[#0f1a19] shadow-[0_1px_0_rgba(13,148,136,0.08)] backdrop-blur-xl',
+  logo: 'rounded-2xl border border-[#b6e2da] bg-white shadow-sm',
+  nav: 'text-[#3d5c58] hover:text-[#0d4f4a]',
+  search: 'border border-[#b6e2da] bg-white/95 text-[#3d5c58] shadow-sm',
+  cta: 'bg-[#0d9488] text-white hover:bg-[#0f7669] shadow-sm shadow-teal-900/10',
+  post: 'border border-[#b6e2da] bg-white text-[#0f1a19] hover:bg-[#e8f7f4]',
+  mobile: 'border-t border-[#b6e2da] bg-[#f4fcfa]',
 } as const
 
 export function Navbar() {
@@ -108,27 +97,34 @@ export function Navbar() {
   const isDirectoryProduct = recipe.homeLayout === 'listing-home' || recipe.homeLayout === 'classified-home'
 
   if (isDirectoryProduct) {
-    const palette = directoryPalette[(recipe.brandPack === 'market-utility' ? 'market-utility' : 'directory-clean') as keyof typeof directoryPalette]
+    const palette = ideoveraDirectoryPalette
 
     return (
       <header className={cn('sticky top-0 z-50 w-full', palette.shell)}>
-        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <div className="flex min-w-0 items-center gap-4">
-            <Link href="/" className="flex shrink-0 items-center gap-3">
-              <div className={cn('flex h-12 w-12 items-center justify-center overflow-hidden p-1.5', palette.logo)}>
-                <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
+        <nav className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+          <div className="flex min-w-0 items-center gap-3 lg:gap-5">
+            <Link href="/" className="flex shrink-0 items-center gap-2.5 sm:gap-3">
+              <div className={cn('flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center overflow-hidden p-1.5', palette.logo)}>
+                <img src="/favicon.png?v=20260423" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
               </div>
               <div className="min-w-0 hidden sm:block">
-                <span className="block truncate text-xl font-semibold">{SITE_CONFIG.name}</span>
-                <span className="block text-[10px] uppercase tracking-[0.24em] opacity-60">{siteContent.navbar.tagline}</span>
+                <span className="block truncate text-lg font-semibold tracking-[-0.02em] sm:text-xl">{SITE_CONFIG.name}</span>
+                <span className="block text-[10px] uppercase tracking-[0.2em] text-[#3d5c58]/80">{siteContent.navbar.tagline}</span>
               </div>
             </Link>
 
-            <div className="hidden items-center gap-5 xl:flex">
+            <div className="hidden items-center gap-1.5 pl-1 xl:flex">
               {primaryNavigation.slice(0, 4).map((task) => {
                 const isActive = pathname.startsWith(task.route)
                 return (
-                  <Link key={task.key} href={task.route} className={cn('text-sm font-semibold transition-colors', isActive ? 'text-foreground' : palette.nav)}>
+                  <Link
+                    key={task.key}
+                    href={task.route}
+                    className={cn(
+                      'rounded-full px-3 py-2 text-sm font-semibold transition-colors',
+                      isActive ? 'bg-[#0d9488] text-white shadow-sm' : palette.nav
+                    )}
+                  >
                     {task.label}
                   </Link>
                 )
@@ -136,15 +132,18 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
-            <div className={cn('flex w-full max-w-xl items-center gap-3 rounded-full px-4 py-3', palette.search)}>
-              <Search className="h-4 w-4" />
-              <span className="text-sm">Find businesses, spaces, and local services</span>
-              <div className="ml-auto hidden items-center gap-1 text-xs opacity-75 md:flex">
+          <div className="hidden min-w-0 flex-1 items-center justify-center md:flex">
+            <Link
+              href="/search"
+              className={cn('flex w-full max-w-md items-center gap-3 rounded-full px-4 py-2.5 transition hover:border-[#0d9488]/50 lg:max-w-lg', palette.search)}
+            >
+              <Search className="h-4 w-4 shrink-0 text-[#0d9488]" />
+              <span className="truncate text-sm text-[#3d5c58]">{siteContent.hero.searchPlaceholder}</span>
+              <div className="ml-auto hidden items-center gap-1 text-[11px] font-medium text-[#3d5c58]/70 lg:flex">
                 <MapPin className="h-3.5 w-3.5" />
-                Local discovery
+                ideovera.com
               </div>
-            </div>
+            </Link>
           </div>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
@@ -180,14 +179,18 @@ export function Navbar() {
         {isMobileMenuOpen && (
           <div className={palette.mobile}>
             <div className="space-y-2 px-4 py-4">
-              <div className={cn('mb-3 flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium', palette.search)}>
-                <Search className="h-4 w-4" />
-                Find businesses, spaces, and services
-              </div>
+              <Link
+                href="/search"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={cn('mb-1 flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium', palette.search)}
+              >
+                <Search className="h-4 w-4 shrink-0" />
+                {siteContent.hero.searchPlaceholder}
+              </Link>
               {mobileNavigation.map((item) => {
                 const isActive = pathname.startsWith(item.href)
                 return (
-                  <Link key={item.name} href={item.href} onClick={() => setIsMobileMenuOpen(false)} className={cn('flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition-colors', isActive ? 'bg-foreground text-background' : palette.post)}>
+                  <Link key={item.name} href={item.href} onClick={() => setIsMobileMenuOpen(false)} className={cn('flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition-colors', isActive ? 'bg-[#0d9488] text-white' : palette.post)}>
                     <item.icon className="h-5 w-5" />
                     {item.name}
                   </Link>
@@ -211,7 +214,7 @@ export function Navbar() {
         <div className="flex min-w-0 flex-1 items-center gap-4 lg:gap-7">
           <Link href="/" className="flex shrink-0 items-center gap-3 whitespace-nowrap pr-2">
             <div className={cn('flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden p-1.5', style.logo)}>
-              <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
+              <img src="/favicon.png?v=20260423" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
             </div>
             <div className="min-w-0 hidden sm:block">
               <span className="block truncate text-xl font-semibold">{SITE_CONFIG.name}</span>

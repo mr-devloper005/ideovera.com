@@ -9,14 +9,14 @@ import { REGISTER_PAGE_OVERRIDE_ENABLED, RegisterPageOverride } from '@/override
 function getRegisterConfig(kind: ReturnType<typeof getProductKind>) {
   if (kind === 'directory') {
     return {
-      shell: 'bg-[#f8fbff] text-slate-950',
-      panel: 'border border-slate-200 bg-white',
-      side: 'border border-slate-200 bg-slate-50',
-      muted: 'text-slate-600',
-      action: 'bg-slate-950 text-white hover:bg-slate-800',
+      shell: 'bg-[radial-gradient(ellipse_100%_60%_at_0%_0%,rgba(13,148,136,0.07),transparent_50%),#f1f4f3] text-[#0f1a19]',
+      panel: 'border border-[#b6e2da]/80 bg-white shadow-[0_20px_55px_rgba(13,148,136,0.08)]',
+      side: 'border border-[#b6e2da]/70 bg-gradient-to-b from-white to-[#f0faf7]',
+      muted: 'text-[#3d5c58]',
+      action: 'bg-[#0d9488] text-white hover:bg-[#0f7669]',
       icon: Building2,
-      title: 'Create a business-ready account',
-      body: 'List services, manage locations, and activate trust signals with a proper directory workflow.',
+      title: 'Create your Ideovera account',
+      body: 'Start posting listings, short offers, and profile content with onboarding tuned for a directory product — not a social feed clone.',
     }
   }
   if (kind === 'editorial') {
@@ -75,8 +75,14 @@ export default function RegisterPage() {
             <h1 className="mt-5 text-4xl font-semibold tracking-[-0.05em]">{config.title}</h1>
             <p className={`mt-5 text-sm leading-8 ${config.muted}`}>{config.body}</p>
             <div className="mt-8 grid gap-4">
-              {['Different onboarding per product family', 'No repeated one-size-fits-all shell', 'Profile, publishing, and discovery aligned'].map((item) => (
-                <div key={item} className="rounded-[1.5rem] border border-current/10 px-4 py-4 text-sm">{item}</div>
+              {[
+                'Onboarding asks for business context first, not generic interests',
+                'The UI mirrors the public bento and teal accent system',
+                'You can still reach other tasks (articles, images) later via the same account',
+              ].map((item) => (
+                <div key={item} className="rounded-2xl border border-[#0d9488]/12 bg-white/60 px-4 py-3 text-sm text-[#3d5c58]">
+                  {item}
+                </div>
               ))}
             </div>
           </div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageShell } from "@/components/shared/page-shell";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -70,34 +71,49 @@ export default async function SearchPage({
 
   const results = normalized.length > 0 ? filtered : filtered.slice(0, 24);
 
+  const desc =
+    query
+      ? `Results for “${query}” — across listings, classifieds, and other connected content types.`
+      : "Search the full Ideovera index: businesses, short offers, media, and more — one field, every task the platform exposes.";
+
   return (
     <PageShell
       title="Search"
-      description={
-        query
-          ? `Results for "${query}"`
-          : "Browse the latest posts across every task."
-      }
+      description={desc}
       actions={
-        <form action="/search" className="flex w-full gap-2 sm:w-auto">
+        <form action="/search" className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
           <input type="hidden" name="master" value="1" />
           {category ? <input type="hidden" name="category" value={category} /> : null}
           {task ? <input type="hidden" name="task" value={task} /> : null}
           <div className="relative w-full sm:w-80">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#0d9488]" />
             <Input
               name="q"
               defaultValue={query}
-              placeholder="Search across tasks..."
-              className="h-11 pl-9"
+              placeholder="Keywords, business name, category…"
+              className="h-11 border-[#b6e2da] pl-9 focus-visible:ring-[#0d9488]"
             />
           </div>
-          <Button type="submit" className="h-11">
+          <Button type="submit" className="h-11 bg-[#0d9488] text-white hover:bg-[#0f7669]">
             Search
           </Button>
         </form>
       }
     >
+      <div className="mb-6 flex flex-wrap gap-2 text-sm">
+        <span className="text-[#3d5c58]">Quick open:</span>
+        <Link href="/listings" className="font-medium text-[#0d9488] hover:underline">
+          Business listings
+        </Link>
+        <span className="text-[#3d5c58]">·</span>
+        <Link href="/classifieds" className="font-medium text-[#0d9488] hover:underline">
+          Classifieds
+        </Link>
+        <span className="text-[#3d5c58]">·</span>
+        <Link href="/search?master=1" className="font-medium text-[#0d9488] hover:underline">
+          Browse all (no query)
+        </Link>
+      </div>
       {results.length ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {results.map((post) => {
@@ -107,8 +123,16 @@ export default async function SearchPage({
           })}
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-          No matching posts yet.
+        <div className="rounded-2xl border border-dashed border-[#0d9488]/30 bg-[#f4fcfa]/60 p-10 text-center text-sm text-[#3d5c58]">
+          No matches for that query yet. Try a shorter keyword, check spelling, or start from a category on the{' '}
+          <Link className="font-semibold text-[#0d9488] hover:underline" href="/listings">
+            listings
+          </Link>{' '}
+          or{' '}
+          <Link className="font-semibold text-[#0d9488] hover:underline" href="/classifieds">
+            classifieds
+          </Link>{' '}
+          page.
         </div>
       )}
     </PageShell>

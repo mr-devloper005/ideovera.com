@@ -23,19 +23,17 @@ export default function PressPage() {
 
   return (
     <PageShell
-      title="Press"
-      description="Media resources, brand assets, and press coverage."
+      title="Press & media"
+      description="Brand assets and coverage for Ideovera and ideovera.com. The site uses a teal bento visual system — when in doubt, pair screenshots with the directory homepage."
     >
       <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <Card className="border-border bg-card">
-          <CardContent className="p-6 space-y-3">
-            <h2 className="text-lg font-semibold text-foreground">Press Kit</h2>
-            <p className="text-sm text-muted-foreground">
-              Download logos, product screenshots, and brand guidelines for media use.
-            </p>
+        <Card className="border-[#b6e2da]/80 bg-gradient-to-b from-white to-[#f4fcfa]/30">
+          <CardContent className="space-y-3 p-6">
+            <h2 className="text-lg font-semibold text-[#0f1a19]">Press kit</h2>
+            <p className="text-sm text-[#3d5c58]">Logos, product captures, and short product descriptions for newsrooms and partners. Prefer wide shots that show search and listing cards in context.</p>
             <div className="grid gap-2">
               {mockPressAssets.map((asset) => (
-                <div key={asset.id} className="rounded-lg border border-border bg-secondary/40 px-4 py-3">
+                <div key={asset.id} className="rounded-xl border border-[#0d9488]/10 bg-white px-4 py-3">
                   <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                     <div>
                       <p className="text-sm font-medium text-foreground">{asset.title}</p>
@@ -43,11 +41,17 @@ export default function PressPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <Badge variant="secondary">{asset.fileType}</Badge>
-                      <Button size="sm" variant="outline" onClick={() => setActiveAssetId(asset.id)}>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-[#0d9488]/30"
+                        onClick={() => setActiveAssetId(asset.id)}
+                      >
                         Preview
                       </Button>
                       <Button
                         size="sm"
+                        className="bg-[#0d9488] text-white hover:bg-[#0f7669]"
                         onClick={() =>
                           toast({
                             title: 'Download started',
@@ -64,13 +68,16 @@ export default function PressPage() {
             </div>
           </CardContent>
         </Card>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {mockPressCoverage.map((item) => (
-            <Card key={item.id} className="border-border bg-card transition-transform hover:-translate-y-1">
-              <CardContent className="p-6">
-                <div className="text-xs uppercase tracking-wide text-muted-foreground">{item.outlet}</div>
-                <p className="mt-2 text-sm text-foreground">{item.headline}</p>
-                <p className="mt-2 text-xs text-muted-foreground">{item.date}</p>
+            <Card
+              key={item.id}
+              className="border-[#b6e2da]/60 bg-white/90 transition-transform hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <CardContent className="p-5 sm:p-6">
+                <div className="text-xs font-medium uppercase tracking-wide text-[#0d9488]">{item.outlet}</div>
+                <p className="mt-2 text-sm text-[#0f1a19]">{item.headline}</p>
+                <p className="mt-2 text-xs text-[#3d5c58]">{item.date}</p>
               </CardContent>
             </Card>
           ))}
