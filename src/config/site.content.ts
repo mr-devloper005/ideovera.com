@@ -2,72 +2,100 @@ import type { TaskKey } from '@/lib/site-config'
 
 export const siteContent = {
   navbar: {
-    tagline: 'Listing platform',
+    tagline: 'Listings & local discovery',
   },
   footer: {
-    tagline: 'Listing platform',
+    tagline: 'Listings & local discovery',
   },
   hero: {
-    badge: 'Latest stories and visuals',
-    title: ['A thoughtful home for', 'stories, visuals, and discovery.'],
-    description: 'A Listing site for Ideovera, built for clean discovery and structured publishing.',
+    badge: 'Discover · compare · act',
+    title: ['A calmer way to', 'scan listings and local offers.'],
+    description:
+      'Ideovera is a directory-style marketplace: clear photos, location cues, and quick paths to the details you care about.',
     primaryCta: {
-      label: 'Read latest stories',
-      href: '/articles',
+      label: 'Browse business listings',
+      href: '/listings',
     },
     secondaryCta: {
-      label: 'Explore visuals',
-      href: '/images',
+      label: 'View classifieds',
+      href: '/classifieds',
     },
-    searchPlaceholder: 'Search stories, visuals, listings, and more',
-    focusLabel: 'Focus',
-    featureCardBadge: 'latest cover rotation',
-    featureCardTitle: 'Latest posts shape the visual identity of the homepage.',
-    featureCardDescription:
-      'Recent images and stories stay at the center of the experience without changing any core platform behavior.',
+    searchPlaceholder: 'Search listings, businesses, and categories',
+    focusLabel: 'Narrow by category',
+    featureCardBadge: 'Featured rotation',
+    featureCardTitle: 'A horizontal strip of top picks — built for quick scanning, not magazine cover stories.',
+    featureCardDescription: 'The feed stays data-forward so you can compare at a glance without wading through filler.',
+  },
+  directory: {
+    heroBadge: 'Listings & marketplace',
+    searchPrompt: 'What do you need today?',
+    locationPrompt: 'Area or city',
+    categoryLabel: 'Browse lanes',
+    featuredEyebrow: 'Featured',
+    featuredTitle: 'Listings to shortlist first',
+    featuredCta: 'View all in directory',
+    splitEyebrow: 'Cross-surface',
+    splitTitle: 'Listings, profiles, and other formats share one design language',
+    bentoKicker: 'Clarity, not noise',
+    bentoTitle: 'A bento layout that keeps comparison simple',
+    bentoBullets: [
+      'Horizontal “featured” lane for high-signal items.',
+      'Cards with soft depth, big radius, and metadata you can trust.',
+      'Listings and classifieds stay distinct while feeling like one product.',
+    ],
   },
   home: {
     metadata: {
-      title: 'Stories, visuals, and discoverable content',
-      description: 'A Listing site for Ideovera, built for clean discovery and structured publishing.',
-      openGraphTitle: 'Stories, visuals, and discoverable content',
+      title: 'Ideovera — listings and local discovery on ideovera.com',
+      description:
+        'Browse business listings, compare categories, and move fast with a marketplace UI tuned for ideovera.com — without noisy feeds or generic “story” framing.',
+      openGraphTitle: 'Ideovera — listings & local discovery',
       openGraphDescription:
-        'Discover articles, visual posts, and connected content through a calmer reading-first experience.',
-      keywords: ['story platform', 'article site', 'visual content', 'content discovery'],
+        'A teal-forward directory experience for business listings, classifieds, and trusted discovery on ideovera.com.',
+      keywords: [
+        'ideovera.com',
+        'business listings',
+        'local directory',
+        'classifieds',
+        'marketplace',
+        'real estate listings',
+        'service directory',
+      ],
     },
-    introBadge: 'About the platform',
-    introTitle: 'Built for reading, browsing, and connecting different kinds of content.',
+    introBadge: 'Why Ideovera',
+    introTitle: 'A discovery surface for listings, not a repurposed blog homepage.',
     introParagraphs: [
-      'This site brings together article-style reading, visual browsing, and structured discovery so visitors can move naturally between different content types.',
-      'Instead of separating stories, visuals, and supporting resources into disconnected surfaces, the platform keeps them connected in one place with consistent navigation and easier exploration.',
-      'Whether someone starts with a story, an image-led post, a listing, or a resource page, they can keep discovering related content without friction.',
+      'The homepage is tuned for people who are hunting for a business, a space, or a fast offer: wide cards, scannable text, and obvious category lanes.',
+      'We keep the layout modular so the same system can show listings, short classified-style posts, and other tasks without every section looking identical.',
+      'Under the hood, every task and route the platform provides stays available — the UI simply prioritises what you came here to do: find and compare quickly.',
     ],
-    sideBadge: 'At a glance',
+    sideBadge: 'Signals at a glance',
     sidePoints: [
-      'Reading-first homepage with stronger emphasis on stories and imagery.',
-      'Connected sections for articles, visuals, listings, and supporting resources.',
-      'Cleaner browsing rhythm designed to make exploration feel easier.',
-      'Lightweight interactions that keep the experience fast and readable.',
+      'Teal-forward marketplace look with bento cards and a horizontal featured lane.',
+      'Listings and classifieds get top billing in navigation; everything else remains reachable from search and the footer.',
+      'Motion stays light, CSS-driven, and tuned for performance on real devices.',
+      'The copy and visuals are Ideovera-specific: no “magazine / visual identity” hand‑waving from a cloned template.',
     ],
     primaryLink: {
-      label: 'Browse articles',
-      href: '/articles',
+      label: 'Open business listings',
+      href: '/listings',
     },
     secondaryLink: {
-      label: 'See visuals',
-      href: '/images',
+      label: 'Search the site',
+      href: '/search',
     },
   },
   cta: {
-    badge: 'Start exploring',
-    title: 'Explore articles, visuals, and resources through one connected experience.',
-    description: 'A Listing site for Ideovera, built for clean discovery and structured publishing.',
+    badge: 'List or claim a business',
+    title: 'Add a listing, manage saves, and keep your presence consistent across Ideovera.',
+    description:
+      'Start with a free account to post and track listings, then use search and direct URLs to reach the rest of the platform’s tasks when you need them.',
     primaryCta: {
-      label: 'Get Started Free',
+      label: 'Create an account',
       href: '/register',
     },
     secondaryCta: {
-      label: 'Contact Sales',
+      label: 'Talk to us',
       href: '/contact',
     },
   },
@@ -77,32 +105,32 @@ export const siteContent = {
 
 export const taskPageMetadata: Record<Exclude<TaskKey, 'comment' | 'org' | 'social'>, { title: string; description: string }> = {
   article: {
-    title: 'Articles and stories',
-    description: 'A Listing site for Ideovera, built for clean discovery and structured publishing.',
+    title: 'Editorial and long reads on Ideovera',
+    description: 'Articles and explainers on ideovera.com — read at your pace while listings stay a click away.',
   },
   listing: {
-    title: 'Listings and discoverable pages',
-    description: 'A Listing site for Ideovera, built for clean discovery and structured publishing.',
+    title: 'Business & service listings on Ideovera',
+    description: 'Scan structured business listings on ideovera.com: categories, contact cues, and map-ready details.',
   },
   classified: {
-    title: 'Classifieds and announcements',
-    description: 'A Listing site for Ideovera, built for clean discovery and structured publishing.',
+    title: 'Classifieds and short offers on Ideovera',
+    description: 'Faster, offer-first posts on ideovera.com: deals, jobs, and timely notices next to the main directory.',
   },
   image: {
-    title: 'Images and visual posts',
-    description: 'A Listing site for Ideovera, built for clean discovery and structured publishing.',
+    title: 'Image posts on Ideovera',
+    description: 'Visual-first posts on ideovera.com for galleries, hero shots, and media-led discovery.',
   },
   profile: {
-    title: 'Profiles and public pages',
-    description: 'A Listing site for Ideovera, built for clean discovery and structured publishing.',
+    title: 'Public profiles on Ideovera',
+    description: 'People and business profile pages on ideovera.com with trust surfaces tied back to listings.',
   },
   sbm: {
-    title: 'Curated links and saved resources',
-    description: 'A Listing site for Ideovera, built for clean discovery and structured publishing.',
+    title: 'Saved links and research on Ideovera',
+    description: 'Curated bookmarks and resources on ideovera.com in a calmer, text-first layout.',
   },
   pdf: {
-    title: 'PDFs and downloadable resources',
-    description: 'A Listing site for Ideovera, built for clean discovery and structured publishing.',
+    title: 'Documents and PDFs on Ideovera',
+    description: 'Downloadable files and PDF resources on ideovera.com, linked to the same discovery system.',
   },
 }
 

@@ -1,68 +1,74 @@
-import Link from "next/link";
-import { PageShell } from "@/components/shared/page-shell";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { SITE_CONFIG } from "@/lib/site-config";
+import Link from 'next/link'
+import { Sparkles, Users, Zap } from 'lucide-react'
+import { PageShell } from '@/components/shared/page-shell'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { SITE_CONFIG } from '@/lib/site-config'
 
 const roles = [
-  { title: "Product Designer", location: "Remote", type: "Full-time", level: "Mid" },
-  { title: "Frontend Engineer", location: "New York, NY", type: "Full-time", level: "Senior" },
-  { title: "Community Lead", location: "Remote", type: "Part-time", level: "Mid" },
-];
+  { title: 'Product Designer (Marketplace)', location: 'Remote', type: 'Full-time', level: 'Mid' },
+  { title: 'Full-stack Engineer (Next.js)', location: 'Remote / US-friendly hours', type: 'Full-time', level: 'Senior' },
+  { title: 'Partner Success (Listings)', location: 'Remote', type: 'Part-time', level: 'Mid' },
+]
 
 const benefits = [
-  "Flexible schedules and remote-first culture",
-  "Health, dental, and vision coverage",
-  "Annual learning stipend",
-  "Quarterly offsites and team retreats",
-];
+  { text: 'Small team; real ownership of discovery, listings, and onboarding flows', icon: Users },
+  { text: 'Design and engineering aligned with the same teal bento system users see', icon: Sparkles },
+  { text: 'Annual learning budget + hardware stipend for remote work', icon: Zap },
+]
 
 export default function CareersPage() {
   return (
     <PageShell
       title="Careers"
-      description={`Help us build the future of community-driven publishing at ${SITE_CONFIG.name}.`}
+      description={`Help us evolve ${SITE_CONFIG.name} as a modern listings product — not another content farm. We value shipping speed, clear writing, and respect for the user’s time.`}
       actions={
-        <Button asChild>
-          <Link href="/contact">Apply Now</Link>
+        <Button className="bg-[#0d9488] text-white hover:bg-[#0f7669]" asChild>
+          <Link href="/contact">Get in touch</Link>
         </Button>
       }
     >
-      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="space-y-4">
-          {roles.map((role) => (
-            <Card key={role.title} className="border-border bg-card">
-              <CardContent className="p-6">
+      <div className="space-y-10">
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="space-y-3">
+            {roles.map((role) => (
+              <div
+                key={role.title}
+                className="rounded-2xl border border-[#b6e2da]/80 bg-white p-5 transition hover:shadow-md hover:shadow-teal-900/5"
+              >
                 <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="secondary">{role.level}</Badge>
-                  <Badge variant="outline">{role.type}</Badge>
+                  <Badge className="border-[#0d9488]/30 bg-[#0d9488]/10 text-[#0d4f4a] hover:bg-[#0d9488]/15">{role.level}</Badge>
+                  <Badge variant="outline" className="border-[#b6e2da] text-[#3d5c58]">
+                    {role.type}
+                  </Badge>
                 </div>
-                <h2 className="mt-3 text-lg font-semibold text-foreground">{role.title}</h2>
-                <p className="mt-1 text-sm text-muted-foreground">{role.location}</p>
-                <Button variant="outline" className="mt-4" asChild>
-                  <Link href="/contact">View Role</Link>
+                <h2 className="mt-2 text-lg font-semibold text-[#0f1a19]">{role.title}</h2>
+                <p className="mt-1 text-sm text-[#3d5c58]">{role.location}</p>
+                <Button variant="outline" className="mt-3 border-[#0d9488]/30" asChild>
+                  <Link href="/contact">Discuss this role</Link>
                 </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        <Card className="border-border bg-card">
-          <CardContent className="p-6">
-            <h3 className="text-lg font-semibold text-foreground">Why {SITE_CONFIG.name}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              We are building a product that helps people discover and share the best knowledge on the web.
+              </div>
+            ))}
+          </div>
+          <div className="rounded-2xl border border-[#0d9488]/12 bg-gradient-to-b from-[#e8f7f4] to-white p-6 sm:p-7">
+            <h3 className="text-lg font-semibold text-[#0f1a19]">Why {SITE_CONFIG.name}?</h3>
+            <p className="mt-2 text-sm leading-7 text-[#3d5c58]">
+              We’re building for people who need to <span className="font-medium text-[#0f1a19]">decide and act</span> — comparing businesses, skimming
+              short offers, and moving on. If that sounds more interesting than “engagement at all costs,” you’ll fit in.
             </p>
-            <div className="mt-4 space-y-2 text-sm text-muted-foreground">
-              {benefits.map((benefit) => (
-                <div key={benefit} className="rounded-md border border-border bg-secondary/40 px-3 py-2">
-                  {benefit}
-                </div>
+            <ul className="mt-4 space-y-3">
+              {benefits.map(({ text, icon: Icon }) => (
+                <li key={text} className="flex gap-3 text-sm text-[#3d5c58]">
+                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-[#b6e2da]/50">
+                    <Icon className="h-4 w-4 text-[#0d9488]" />
+                  </span>
+                  {text}
+                </li>
               ))}
-            </div>
-          </CardContent>
-        </Card>
+            </ul>
+          </div>
+        </div>
       </div>
     </PageShell>
-  );
+  )
 }

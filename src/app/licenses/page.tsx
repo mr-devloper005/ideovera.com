@@ -1,28 +1,30 @@
 ﻿import { PageShell } from '@/components/shared/page-shell'
-import { Card, CardContent } from '@/components/ui/card'
 
 const licenses = [
-  { name: 'Next.js', description: 'MIT License' },
-  { name: 'React', description: 'MIT License' },
-  { name: 'Tailwind CSS', description: 'MIT License' },
+  { name: 'Next.js', description: 'MIT License — https://github.com/vercel/next.js' },
+  { name: 'React', description: 'MIT License — https://github.com/facebook/react' },
+  { name: 'Tailwind CSS', description: 'MIT License — https://github.com/tailwindlabs/tailwindcss' },
+  { name: 'Radix UI', description: 'MIT License — https://www.radix-ui.com' },
+  { name: 'Lucide', description: 'ISC License — https://lucide.dev' },
 ]
 
 export default function LicensesPage() {
   return (
     <PageShell
-      title="Licenses"
-      description="Open source licenses and acknowledgements."
+      title="Open source licenses"
+      description="Acknowledgement of third-party software that helps power Ideovera. We’re grateful to the open source community; this page is informational only, not legal advice."
     >
-      <Card className="border-border bg-card">
-        <CardContent className="p-6 space-y-3">
-          {licenses.map((license) => (
-            <div key={license.name} className="rounded-lg border border-border bg-secondary/40 p-4">
-              <h3 className="text-sm font-semibold text-foreground">{license.name}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{license.description}</p>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
+      <div className="space-y-3">
+        {licenses.map((license) => (
+          <div
+            key={license.name}
+            className="flex flex-col gap-1 rounded-2xl border border-[#b6e2da]/60 bg-[#f4fcfa]/30 px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <h3 className="text-sm font-semibold text-[#0f1a19]">{license.name}</h3>
+            <p className="text-sm text-[#3d5c58]">{license.description}</p>
+          </div>
+        ))}
+      </div>
     </PageShell>
   )
 }
