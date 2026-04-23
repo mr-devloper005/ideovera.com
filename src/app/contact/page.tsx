@@ -9,11 +9,11 @@ import { CONTACT_PAGE_OVERRIDE_ENABLED, ContactPageOverride } from '@/overrides/
 function getTone(kind: ReturnType<typeof getProductKind>) {
   if (kind === 'directory') {
     return {
-      shell: 'bg-[#f8fbff] text-slate-950',
-      panel: 'border border-slate-200 bg-white',
-      soft: 'border border-slate-200 bg-slate-50',
-      muted: 'text-slate-600',
-      action: 'bg-slate-950 text-white hover:bg-slate-800',
+      shell: 'bg-[radial-gradient(ellipse_100%_60%_at_0%_0%,rgba(13,148,136,0.07),transparent_50%),#f1f4f3] text-[#0f1a19]',
+      panel: 'border border-[#b6e2da]/80 bg-white shadow-[0_16px_48px_rgba(13,148,136,0.07)]',
+      soft: 'border border-[#bfe8e0]/90 bg-white/90',
+      muted: 'text-[#3d5c58]',
+      action: 'bg-[#0d9488] text-white hover:bg-[#0f7669] shadow-sm shadow-teal-900/10',
     }
   }
   if (kind === 'editorial') {
@@ -82,9 +82,12 @@ export default function ContactPage() {
       <main className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <section className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">Contact {SITE_CONFIG.name}</p>
-            <h1 className="mt-4 text-5xl font-semibold tracking-[-0.05em]">A support page that matches the product, not a generic contact form.</h1>
-            <p className={`mt-5 max-w-2xl text-sm leading-8 ${tone.muted}`}>Tell us what you are trying to publish, fix, or launch. We will route it through the right lane instead of forcing every request into the same support bucket.</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0d9488]">Contact {SITE_CONFIG.name}</p>
+            <h1 className="mt-4 text-4xl font-semibold tracking-[-0.05em] sm:text-5xl">How can we help on ideovera.com?</h1>
+            <p className={`mt-5 max-w-2xl text-sm leading-8 ${tone.muted}`}>
+              Listings, classifieds, and accounts each have a different workflow. Send context up front (category, link, and what you already tried) so we can
+              answer without a dozen follow-ups.
+            </p>
             <div className="mt-8 space-y-4">
               {lanes.map((lane) => (
                 <div key={lane.title} className={`rounded-[1.6rem] p-5 ${tone.soft}`}>

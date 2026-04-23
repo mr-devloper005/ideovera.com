@@ -115,21 +115,13 @@ export function TaskPostCard({
   const isDirectorySurface = isDirectoryProduct && (variant === 'listing' || variant === 'classified' || variant === 'profile')
 
   if (isDirectorySurface) {
-    const cardTone = recipe.brandPack === 'market-utility'
-      ? {
-          frame: 'rounded-[1.75rem] border border-[#d7deca] bg-white shadow-[0_18px_44px_rgba(64,76,34,0.08)] hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(64,76,34,0.14)]',
-          badge: 'bg-[#1f2617] text-[#edf5dc]',
-          muted: 'text-[#5b664c]',
-          title: 'text-[#1f2617]',
-          cta: 'text-[#1f2617]',
-        }
-      : {
-          frame: 'rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_18px_44px_rgba(15,23,42,0.08)] hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(15,23,42,0.14)]',
-          badge: 'bg-slate-950 text-white',
-          muted: 'text-slate-600',
-          title: 'text-slate-950',
-          cta: 'text-slate-950',
-        }
+    const cardTone = {
+      frame: 'rounded-[1.75rem] border border-[#b6e2da]/90 bg-white shadow-[0_18px_48px_rgba(13,148,136,0.08)] hover:-translate-y-1 hover:shadow-[0_24px_56px_rgba(13,148,136,0.12)]',
+      badge: 'bg-[#0d9488] text-white',
+      muted: 'text-[#3d5c58]',
+      title: 'text-[#0f1a19]',
+      cta: 'text-[#0d9488]',
+    }
 
     return (
       <Link href={href} className={`group flex h-full flex-col overflow-hidden transition duration-300 ${cardTone.frame}`}>

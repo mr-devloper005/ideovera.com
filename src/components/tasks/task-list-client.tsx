@@ -12,9 +12,11 @@ type Props = {
   task: TaskKey;
   initialPosts: SitePost[];
   category?: string;
+  /** Optional grid / gap classes to vary presentation per task without changing data logic. */
+  gridClassName?: string;
 };
 
-export function TaskListClient({ task, initialPosts, category }: Props) {
+export function TaskListClient({ task, initialPosts, category, gridClassName }: Props) {
   const localPosts = getLocalPostsForTask(task);
 
   const merged = useMemo(() => {
@@ -54,14 +56,14 @@ export function TaskListClient({ task, initialPosts, category }: Props) {
 
   if (!merged.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-        No posts yet for this section.
+      <div className="rounded-3xl border border-dashed border-[#0d9488]/25 bg-[#f4fcfa]/50 p-10 text-center text-sm text-[#3d5c58]">
+        No posts match this view yet. Try another category or check back soon.
       </div>
     );
   }
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div className={gridClassName || 'grid gap-6 sm:grid-cols-2 lg:grid-cols-4'}>
       {merged.map((post) => {
         const localOnly = (post as any).localOnly;
         const href = localOnly

@@ -9,14 +9,14 @@ import { LOGIN_PAGE_OVERRIDE_ENABLED, LoginPageOverride } from '@/overrides/logi
 function getLoginConfig(kind: ReturnType<typeof getProductKind>) {
   if (kind === 'directory') {
     return {
-      shell: 'bg-[#f8fbff] text-slate-950',
-      panel: 'border border-slate-200 bg-white',
-      side: 'border border-slate-200 bg-slate-50',
-      muted: 'text-slate-600',
-      action: 'bg-slate-950 text-white hover:bg-slate-800',
+      shell: 'bg-[radial-gradient(ellipse_100%_60%_at_0%_0%,rgba(13,148,136,0.07),transparent_50%),#f1f4f3] text-[#0f1a19]',
+      panel: 'border border-[#b6e2da]/80 bg-white shadow-[0_20px_55px_rgba(13,148,136,0.08)]',
+      side: 'border border-[#b6e2da]/70 bg-gradient-to-b from-white to-[#f0faf7]',
+      muted: 'text-[#3d5c58]',
+      action: 'bg-[#0d9488] text-white hover:bg-[#0f7669]',
       icon: Building2,
-      title: 'Access your business dashboard',
-      body: 'Manage listings, verification details, contact info, and local discovery surfaces from one place.',
+      title: 'Sign in to Ideovera',
+      body: 'Open your account to manage business listings, classifieds, and saved work — the same teal-forward layout as the public site.',
     }
   }
   if (kind === 'editorial') {
@@ -75,8 +75,14 @@ export default function LoginPage() {
             <h1 className="mt-5 text-4xl font-semibold tracking-[-0.05em]">{config.title}</h1>
             <p className={`mt-5 text-sm leading-8 ${config.muted}`}>{config.body}</p>
             <div className="mt-8 grid gap-4">
-              {['Cleaner product-specific workflows', 'Palette and layout matched to the site family', 'Fewer repeated admin patterns'].map((item) => (
-                <div key={item} className="rounded-[1.5rem] border border-current/10 px-4 py-4 text-sm">{item}</div>
+              {[
+                'Listings, classifieds, and search stay one navigation away',
+                'Visual rhythm aligned with the Ideovera marketplace shell',
+                'Form fields follow the same rounded “bento” system as the homepage',
+              ].map((item) => (
+                <div key={item} className="rounded-2xl border border-[#0d9488]/12 bg-white/60 px-4 py-3 text-sm text-[#3d5c58]">
+                  {item}
+                </div>
               ))}
             </div>
           </div>
