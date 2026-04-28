@@ -127,16 +127,15 @@ function getCurationTone() {
   }
 }
 
-function DirectoryHome({ primaryTask, enabledTasks, listingPosts, classifiedPosts, profilePosts }: {
+function DirectoryHome({ primaryTask, enabledTasks, listingPosts, profilePosts }: {
   primaryTask?: EnabledTask
   enabledTasks: EnabledTask[]
   listingPosts: SitePost[]
-  classifiedPosts: SitePost[]
   profilePosts: SitePost[]
 }) {
   const d = siteContent.directory
-  const featuredListings = (listingPosts.length ? listingPosts : classifiedPosts).slice(0, 5)
-  const featuredTaskKey: TaskKey = listingPosts.length ? 'listing' : 'classified'
+  const featuredListings = listingPosts.slice(0, 5)
+  const featuredTaskKey: TaskKey = 'listing'
   const quickRoutes = enabledTasks.slice(0, 4)
   const primaryTitle = [siteContent.hero.title[0], siteContent.hero.title[1]].join(' ')
   const categoryChips = [
@@ -215,7 +214,7 @@ function DirectoryHome({ primaryTask, enabledTasks, listingPosts, classifiedPost
                 {[
                   ['Bento cards', 'Large radii, soft depth'],
                   ['Field-ready metadata', 'Map & contact cues on detail pages'],
-                  ['Two top lanes', 'Listings + classifieds first'],
+                  ['Business-first', 'Listings-focused discovery flow'],
                 ].map(([label, value]) => (
                   <div key={label} className={`rounded-2xl p-4 sm:p-5 ${tone.soft}`}>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#0f1a19]/55">{label}</p>
@@ -308,9 +307,9 @@ function DirectoryHome({ primaryTask, enabledTasks, listingPosts, classifiedPost
             </ul>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
-            {(profilePosts.length ? profilePosts : classifiedPosts).slice(0, 4).map((post) => {
+            {profilePosts.slice(0, 4).map((post) => {
               const meta = getPostMeta(post)
-              const taskKey = resolveTaskKey(post.task, profilePosts.length ? 'profile' : 'classified')
+              const taskKey = resolveTaskKey(post.task, 'profile')
               return (
                 <Link
                   key={post.id}
@@ -544,7 +543,7 @@ export default async function HomePage() {
     return <HomePageOverride />
   }
 
-  const enabledTasks = SITE_CONFIG.tasks.filter((task) => task.enabled)
+  const enabledTasks = SITE_CONFIG.tasks.filter((task) => task.enabled && task.key !== 'classified')
   const { recipe } = getFactoryState()
   const productKind = getProductKind(recipe)
   const taskFeed: TaskFeedItem[] = (
@@ -559,7 +558,6 @@ export default async function HomePage() {
   const primaryTask = enabledTasks.find((task) => task.key === recipe.primaryTask) || enabledTasks[0]
   const supportTasks = enabledTasks.filter((task) => task.key !== primaryTask?.key)
   const listingPosts = taskFeed.find(({ task }) => task.key === 'listing')?.posts || []
-  const classifiedPosts = taskFeed.find(({ task }) => task.key === 'classified')?.posts || []
   const articlePosts = taskFeed.find(({ task }) => task.key === 'article')?.posts || []
   const imagePosts = taskFeed.find(({ task }) => task.key === 'image')?.posts || []
   const profilePosts = taskFeed.find(({ task }) => task.key === 'profile')?.posts || []
@@ -596,7 +594,6 @@ export default async function HomePage() {
           primaryTask={primaryTask}
           enabledTasks={enabledTasks}
           listingPosts={listingPosts}
-          classifiedPosts={classifiedPosts}
           profilePosts={profilePosts}
         />
       ) : null}
