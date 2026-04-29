@@ -16,7 +16,6 @@ const quickLinks = [
 const createActions = [
   { label: 'Create Article', href: '/create/article', icon: Plus },
   { label: 'Create Listing', href: '/create/listing', icon: Plus },
-  { label: 'Create Classified', href: '/create/classified', icon: Plus },
   { label: 'Submit Bookmark', href: '/create/sbm', icon: Plus },
 ]
 

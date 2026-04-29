@@ -51,6 +51,8 @@ export default function ContactPage() {
   const { recipe } = getFactoryState()
   const productKind = getProductKind(recipe)
   const tone = getTone(productKind)
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || `contact@${SITE_CONFIG.domain}`
+  const contactEmailHref = `mailto:${contactEmail}`
   const lanes =
     productKind === 'directory'
       ? [
@@ -85,7 +87,7 @@ export default function ContactPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0d9488]">Contact {SITE_CONFIG.name}</p>
             <h1 className="mt-4 text-4xl font-semibold tracking-[-0.05em] sm:text-5xl">How can we help on ideovera.com?</h1>
             <p className={`mt-5 max-w-2xl text-sm leading-8 ${tone.muted}`}>
-              Listings, classifieds, and accounts each have a different workflow. Send context up front (category, link, and what you already tried) so we can
+              Listings and accounts each have a different workflow. Send context up front (category, link, and what you already tried) so we can
               answer without a dozen follow-ups.
             </p>
             <div className="mt-8 space-y-4">
@@ -101,6 +103,15 @@ export default function ContactPage() {
 
           <div className={`rounded-[2rem] p-7 ${tone.panel}`}>
             <h2 className="text-2xl font-semibold">Send a message</h2>
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <a
+                href={contactEmailHref}
+                className={`inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold ${tone.action}`}
+              >
+                Email us
+              </a>
+              <span className={`text-sm ${tone.muted}`}>{contactEmail}</span>
+            </div>
             <form className="mt-6 grid gap-4">
               <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Your name" />
               <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Email address" />
