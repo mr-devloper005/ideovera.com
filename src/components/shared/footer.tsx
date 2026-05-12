@@ -28,17 +28,12 @@ const footerLinks = {
     { name: 'About', href: '/about' },
     { name: 'Team', href: '/team' },
     { name: 'Careers', href: '/careers' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Press', href: '/press' },
   ],
   resources: [
     { name: 'Search', href: '/search' },
     { name: 'Articles', href: '/articles' },
     { name: 'Images', href: '/images' },
     { name: 'Help Center', href: '/help' },
-    { name: 'Community', href: '/community' },
-    { name: 'Developers', href: '/developers' },
-    { name: 'Status', href: '/status' },
     { name: 'Contact', href: '/contact' },
   ],
   legal: [
